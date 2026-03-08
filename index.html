@@ -3,30 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyWeb - Learn Hacking & Programming</title>
+    <title>MyWeb - Hacker Terminal</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="ascii-container"></div>
+    <!-- Matrix Rain Canvas -->
+    <canvas id="matrix-rain"></canvas>
     
-    <!-- Modern Navbar with glassmorphism -->
+    <!-- Scanline Overlay -->
+    <div class="scanlines"></div>
+    
+    <!-- CRT Flicker Effect -->
+    <div class="crt-overlay"></div>
+    
+    <!-- Modern Navbar with hacker aesthetic -->
     <nav class="navbar">
         <div class="logo">
             <a href="index.html">
                 <span class="logo-icon">&lt;/&gt;</span>
-                <h1>MyWeb</h1>
+                <h1 class="glitch" data-text="MyWeb">MyWeb</h1>
             </a>
         </div>
         <div class="menu">
             <a href="form.html" class="nav-link">
-                <span>Join Us</span>
+                <span class="nav-icon">⬡</span>
+                <span>JOIN_US</span>
             </a>
             <a href="table.html" class="nav-link">
-                <span>Explore</span>
+                <span class="nav-icon">⬡</span>
+                <span>EXPLORE</span>
             </a>
             <a href="https://github.com/RZK101" class="nav-link" target="_blank">
-                <span>Github</span>
+                <span class="nav-icon">⬡</span>
+                <span>GITHUB</span>
             </a>
             <img src="R.jpg" alt="Profile Picture" class="profile-pic">
         </div>
@@ -37,69 +47,145 @@
         </button>
     </nav>
     
-    <!-- Main Content with modern card design -->
+    <!-- Main Content with terminal design -->
     <main class="content">
-        <div class="welcome-box">
-            <div class="welcome-header">
-                <div class="terminal-dots">
-                    <span class="dot red"></span>
-                    <span class="dot yellow"></span>
-                    <span class="dot green"></span>
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-controls">
+                    <span class="control-btn close"></span>
+                    <span class="control-btn minimize"></span>
+                    <span class="control-btn maximize"></span>
                 </div>
-                <span class="terminal-title">welcome.sh</span>
+                <div class="terminal-title-bar">
+                    <span class="terminal-icon">💀</span>
+                    <span class="terminal-path">root@myweb:~/hackerman</span>
+                </div>
             </div>
-            <h1>Welcome to MyWeb!</h1>
-            <p>This is your first step to learn some hacking tips on this website. Here, you'll learn programming languages and skills to improve your hacking skills.</p>
-            <div class="cta-buttons">
-                <a href="form.html" class="btn btn-primary">Get Started</a>
-                <a href="table.html" class="btn btn-secondary">Learn More</a>
+            <div class="terminal-body">
+                <div class="command-line">
+                    <span class="prompt">┌──(root㉿myweb)-[~]</span>
+                </div>
+                <div class="command-line">
+                    <span class="prompt">└─#</span>
+                    <span class="command">./welcome.sh</span>
+                </div>
+                <div class="typing-container" id="typing-effect"></div>
+                <div class="cursor-blink">█</div>
+                
+                <div class="system-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">STATUS:</span>
+                        <span class="stat-value online">ONLINE</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">ENCRYPTION:</span>
+                        <span class="stat-value">AES-256</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">PROXY:</span>
+                        <span class="stat-value">ACTIVE</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">NODES:</span>
+                        <span class="stat-value" id="node-count">1337</span>
+                    </div>
+                </div>
+                
+                <div class="cta-buttons">
+                    <a href="form.html" class="btn btn-primary">
+                        <span class="btn-icon">▶</span>
+                        INITIATE_ACCESS
+                    </a>
+                    <a href="table.html" class="btn btn-secondary">
+                        <span class="btn-icon">◈</span>
+                        EXPLORE_DATA
+                    </a>
+                </div>
             </div>
         </div>
         
-        <!-- Feature cards -->
+        <!-- Feature cards with hacker aesthetic -->
         <div class="features-grid">
-            <div class="feature-card">
+            <div class="feature-card hack-card">
+                <div class="card-glitch"></div>
                 <div class="feature-icon">🔐</div>
-                <h3>Security</h3>
-                <p>Learn ethical hacking and cybersecurity fundamentals</p>
+                <div class="hex-decoration"></div>
+                <h3><span class="highlight">SECURITY</span>_OPS</h3>
+                <p>Master ethical hacking, penetration testing & cybersecurity protocols</p>
+                <div class="card-footer">
+                    <span class="level-badge">LEVEL: ADVANCED</span>
+                </div>
             </div>
-            <div class="feature-card">
+            <div class="feature-card hack-card">
+                <div class="card-glitch"></div>
                 <div class="feature-icon">💻</div>
-                <h3>Coding</h3>
-                <p>Master programming languages used by professionals</p>
+                <div class="hex-decoration"></div>
+                <h3><span class="highlight">CODING</span>_MATRIX</h3>
+                <p>Weaponize your skills with Python, JavaScript, C++ & assembly</p>
+                <div class="card-footer">
+                    <span class="level-badge">LEVEL: EXPERT</span>
+                </div>
             </div>
-            <div class="feature-card">
+            <div class="feature-card hack-card">
+                <div class="card-glitch"></div>
                 <div class="feature-icon">🚀</div>
-                <h3>Projects</h3>
-                <p>Build real-world projects to showcase your skills</p>
+                <div class="hex-decoration"></div>
+                <h3><span class="highlight">PROJECTS</span>_LAB</h3>
+                <p>Deploy real-world exploits and build your hacker portfolio</p>
+                <div class="card-footer">
+                    <span class="level-badge">LEVEL: ELITE</span>
+                </div>
             </div>
         </div>
+        
+        <!-- Binary Code Stream -->
+        <div class="binary-stream" id="binary-stream"></div>
     </main>
 
-    <!-- Modern Footer -->
+    <!-- Modern Footer with hacker theme -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h4>MyWeb</h4>
-                <p>Empowering the next generation of hackers and developers</p>
+                <h4 class="footer-logo">&lt;MyWeb/&gt;</h4>
+                <p class="footer-tagline">"Hack the Planet. Build the Future."</p>
+                <div class="footer-status">
+                    <span class="status-indicator"></span>
+                    <span>SYSTEM OPERATIONAL</span>
+                </div>
             </div>
             <div class="footer-section">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="form.html">Join Us</a></li>
-                    <li><a href="table.html">Explore</a></li>
-                    <li><a href="https://github.com/RZK101">Github</a></li>
+                <h4>QUICK_ACCESS</h4>
+                <ul class="footer-links">
+                    <li><a href="form.html"><span class="link-prefix">></span> Join Us</a></li>
+                    <li><a href="table.html"><span class="link-prefix">></span> Explore</a></li>
+                    <li><a href="https://github.com/RZK101"><span class="link-prefix">></span> Github</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h4>Connect</h4>
+                <h4>CONNECT_NODE</h4>
                 <div class="social-links">
-                    <a href="https://github.com/RZK101" aria-label="GitHub">GH</a>
+                    <a href="https://github.com/RZK101" class="social-link" aria-label="GitHub">
+                        <span class="social-icon">GH</span>
+                        <span class="link-glow"></span>
+                    </a>
+                </div>
+                <div class="qr-placeholder">
+                    <div class="qr-code"></div>
+                    <span>SCAN_TO_CONNECT</span>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 MyWeb. All rights reserved.</p>
+            <div class="copyright">
+                <span>&copy; 2024 MyWeb.</span>
+                <span class="divider">|</span>
+                <span>All Rights Reserved.</span>
+            </div>
+            <div class="tech-stack">
+                <span>BUILD: v2.0.77</span>
+                <span class="divider">|</span>
+                <span>ENCRYPTED</span>
+            </div>
         </div>
     </footer>
 
