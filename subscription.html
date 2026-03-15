@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription - MyWeb</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        .subscription-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .subscription-wrapper {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .subscription-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .subscription-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 20px var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .subscription-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-10px);
+        }
+
+        .pricing-card.popular {
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 1rem;
+            right: -2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: var(--bg-dark);
+            padding: 0.5rem 3rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            transform: rotate(45deg);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pricing-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .pricing-period {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-amount {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-currency {
+            font-size: 1.5rem;
+            vertical-align: super;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-check {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .subscribe-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            background: transparent;
+            color: var(--primary-color);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            margin-top: 1rem;
+        }
+
+        .subscribe-btn:hover {
+            background: var(--primary-color);
+            color: var(--bg-dark);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-3px);
+        }
+
+        .subscribe-btn.primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: var(--bg-dark);
+            border: none;
+        }
+
+        .subscribe-btn.primary:hover {
+            box-shadow: var(--shadow-glow-strong);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            transition: var(--transition-smooth);
+        }
+
+        .back-link:hover {
+            color: var(--primary-color);
+        }
+
+        .guarantee {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(0, 255, 65, 0.05);
+            border: 1px dashed var(--border-color);
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .guarantee p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Matrix Rain Canvas -->
+    <canvas id="matrix-rain"></canvas>
+    
+    <!-- Scanline Overlay -->
+    <div class="scanlines"></div>
+    
+    <!-- CRT Overlay Effect -->
+    <div class="crt-overlay"></div>
+    
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <span class="logo-icon">&lt;/&gt;</span>
+                <h1 class="glitch" data-text="MyWeb">MyWeb</h1>
+            </a>
+        </div>
+        <div class="menu">
+            <a href="form.html" class="nav-link">
+                <span class="nav-icon">⬡</span>
+                <span>JOIN_US</span>
+            </a>
+            <a href="table.html" class="nav-link">
+                <span class="nav-icon">⬡</span>
+                <span>EXPLORE</span>
+            </a>
+            <a href="https://github.com/RZK101" class="nav-link" target="_blank">
+                <span class="nav-icon">⬡</span>
+                <span>GITHUB</span>
+            </a>
+            <img src="R.jpg" alt="Profile Picture" class="profile-pic">
+        </div>
+        <button class="mobile-menu-btn" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+    
+    <!-- Subscription Main Content -->
+    <main class="content">
+        <div class="subscription-container">
+            <div class="subscription-wrapper">
+                <a href="calculator.html" class="back-link">
+                    <span>←</span>
+                    <span>Kembali ke Kalkulator</span>
+                </a>
+                
+                <div class="subscription-header">
+                    <h1>PILIH PAKET BERLANGGANAN</h1>
+                    <p>Akses penuh fitur kalkulator premium dan tools eksklusif</p>
+                </div>
+                
+                <div class="pricing-grid">
+                    <!-- Monthly Plan -->
+                    <div class="pricing-card">
+                        <div class="pricing-icon">📅</div>
+                        <h3>Bulanan</h3>
+                        <p class="pricing-period">Per Bulan</p>
+                        <div class="pricing-amount">
+                            <span class="pricing-currency">Rp</span>29<span style="font-size: 1.5rem">.900</span>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><span class="feature-check">✓</span> Akses Kalkulator Premium</li>
+                            <li><span class="feature-check">✓</span> Tanpa Iklan</li>
+                            <li><span class="feature-check">✓</span> Support 24/7</li>
+                            <li><span class="feature-check">✓</span> Update Fitur Bulanan</li>
+                        </ul>
+                        <button class="subscribe-btn" onclick="selectPlan('monthly')">Pilih Bulanan</button>
+                    </div>
+                    
+                    <!-- Yearly Plan -->
+                    <div class="pricing-card popular">
+                        <div class="popular-badge">HEMAT 40%</div>
+                        <div class="pricing-icon">🚀</div>
+                        <h3>Tahunan</h3>
+                        <p class="pricing-period">Per Tahun</p>
+                        <div class="pricing-amount">
+                            <span class="pricing-currency">Rp</span>299<span style="font-size: 1.5rem">.000</span>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><span class="feature-check">✓</span> Akses Kalkulator Premium</li>
+                            <li><span class="feature-check">✓</span> Tanpa Iklan</li>
+                            <li><span class="feature-check">✓</span> Support Prioritas 24/7</li>
+                            <li><span class="feature-check">✓</span> Update Fitur Mingguan</li>
+                            <li><span class="feature-check">✓</span> Akses Early Beta Features</li>
+                            <li><span class="feature-check">✓</span> Diskon Khusus Renewal</li>
+                        </ul>
+                        <button class="subscribe-btn primary" onclick="selectPlan('yearly')">Pilih Tahunan</button>
+                    </div>
+                </div>
+                
+                <div class="guarantee">
+                    <p>🔒 Pembayaran Aman & Terenkripsi | ✅ Garansi 30 Hari Uang Kembali</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4 class="footer-logo">&lt;MyWeb/&gt;</h4>
+                <p class="footer-tagline">"Hack the Planet. Build the Future."</p>
+                <div class="footer-status">
+                    <span class="status-indicator"></span>
+                    <span>SYSTEM OPERATIONAL</span>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>QUICK_ACCESS</h4>
+                <ul class="footer-links">
+                    <li><a href="form.html"><span class="link-prefix">></span> Join Us</a></li>
+                    <li><a href="table.html"><span class="link-prefix">></span> Explore</a></li>
+                    <li><a href="https://github.com/RZK101"><span class="link-prefix">></span> Github</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>CONNECT_NODE</h4>
+                <div class="social-links">
+                    <a href="https://github.com/RZK101" class="social-link" aria-label="GitHub">
+                        <span class="social-icon">GH</span>
+                        <span class="link-glow"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="copyright">
+                <span>&copy; 2024 MyWeb.</span>
+                <span class="divider">|</span>
+                <span>All Rights Reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="subscription.js"></script>
+</body>
+</html>
