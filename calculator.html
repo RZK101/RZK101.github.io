@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator - MyWeb</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        .calculator-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .calculator {
+            background: var(--bg-terminal);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow-glow), 0 10px 40px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .calculator-display {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: right;
+        }
+
+        .calculator-display input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: var(--primary-color);
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            text-align: right;
+            outline: none;
+        }
+
+        .calculator-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+        }
+
+        .calc-btn {
+            padding: 1.25rem;
+            font-size: 1.25rem;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: rgba(0, 50, 0, 0.3);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            text-transform: uppercase;
+        }
+
+        .calc-btn:hover {
+            background: var(--primary-color);
+            color: var(--bg-dark);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-2px);
+        }
+
+        .calc-btn.operator {
+            background: rgba(0, 255, 65, 0.2);
+            border-color: var(--primary-color);
+        }
+
+        .calc-btn.equals {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: var(--bg-dark);
+            grid-column: span 2;
+            border: none;
+        }
+
+        .calc-btn.equals:hover {
+            box-shadow: var(--shadow-glow-strong);
+            transform: translateY(-3px);
+        }
+
+        .calc-btn.clear {
+            background: rgba(255, 0, 60, 0.2);
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .calc-btn.clear:hover {
+            background: var(--accent-color);
+            color: var(--bg-dark);
+        }
+
+        .subscription-info {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px dashed var(--primary-color);
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .subscription-info a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .subscription-info a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Matrix Rain Canvas -->
+    <canvas id="matrix-rain"></canvas>
+    
+    <!-- Scanline Overlay -->
+    <div class="scanlines"></div>
+    
+    <!-- CRT Overlay Effect -->
+    <div class="crt-overlay"></div>
+    
+    <!-- Modern Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <span class="logo-icon">&lt;/&gt;</span>
+                <h1 class="glitch" data-text="MyWeb">MyWeb</h1>
+            </a>
+        </div>
+        <div class="menu">
+            <a href="form.html" class="nav-link">
+                <span class="nav-icon">⬡</span>
+                <span>JOIN_US</span>
+            </a>
+            <a href="table.html" class="nav-link">
+                <span class="nav-icon">⬡</span>
+                <span>EXPLORE</span>
+            </a>
+            <a href="https://github.com/RZK101" class="nav-link" target="_blank">
+                <span class="nav-icon">⬡</span>
+                <span>GITHUB</span>
+            </a>
+            <img src="R.jpg" alt="Profile Picture" class="profile-pic">
+        </div>
+        <button class="mobile-menu-btn" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+    
+    <!-- Calculator Main Content -->
+    <main class="content">
+        <div class="calculator-container">
+            <div class="calculator">
+                <div class="calculator-display">
+                    <input type="text" id="display" readonly value="0">
+                </div>
+                <div class="calculator-buttons">
+                    <button class="calc-btn clear" onclick="clearDisplay()">C</button>
+                    <button class="calc-btn operator" onclick="appendOperator('/')">/</button>
+                    <button class="calc-btn operator" onclick="appendOperator('*')">×</button>
+                    <button class="calc-btn operator" onclick="appendOperator('-')">-</button>
+                    
+                    <button class="calc-btn" onclick="appendNumber('7')">7</button>
+                    <button class="calc-btn" onclick="appendNumber('8')">8</button>
+                    <button class="calc-btn" onclick="appendNumber('9')">9</button>
+                    <button class="calc-btn operator" onclick="appendOperator('+')">+</button>
+                    
+                    <button class="calc-btn" onclick="appendNumber('4')">4</button>
+                    <button class="calc-btn" onclick="appendNumber('5')">5</button>
+                    <button class="calc-btn" onclick="appendNumber('6')">6</button>
+                    <button class="calc-btn" onclick="appendNumber('.')">.</button>
+                    
+                    <button class="calc-btn" onclick="appendNumber('1')">1</button>
+                    <button class="calc-btn" onclick="appendNumber('2')">2</button>
+                    <button class="calc-btn" onclick="appendNumber('3')">3</button>
+                    <button class="calc-btn" onclick="appendNumber('0')">0</button>
+                    
+                    <button class="calc-btn equals" onclick="calculateResult()">=</button>
+                </div>
+                <div class="subscription-info">
+                    <p>🔒 Klik "=" untuk mengakses fitur premium</p>
+                    <p><a href="subscription.html">Lihat Paket Berlangganan</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4 class="footer-logo">&lt;MyWeb/&gt;</h4>
+                <p class="footer-tagline">"Hack the Planet. Build the Future."</p>
+                <div class="footer-status">
+                    <span class="status-indicator"></span>
+                    <span>SYSTEM OPERATIONAL</span>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>QUICK_ACCESS</h4>
+                <ul class="footer-links">
+                    <li><a href="form.html"><span class="link-prefix">></span> Join Us</a></li>
+                    <li><a href="table.html"><span class="link-prefix">></span> Explore</a></li>
+                    <li><a href="https://github.com/RZK101"><span class="link-prefix">></span> Github</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>CONNECT_NODE</h4>
+                <div class="social-links">
+                    <a href="https://github.com/RZK101" class="social-link" aria-label="GitHub">
+                        <span class="social-icon">GH</span>
+                        <span class="link-glow"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="copyright">
+                <span>&copy; 2024 MyWeb.</span>
+                <span class="divider">|</span>
+                <span>All Rights Reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="calculator.js"></script>
+</body>
+</html>
