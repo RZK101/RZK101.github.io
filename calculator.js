@@ -32,26 +32,8 @@ function clearDisplay() {
 }
 
 function calculateResult() {
-    try {
-        // Evaluate the expression safely
-        const result = eval(displayValue);
-        
-        // Show result briefly then redirect to subscription page
-        displayValue = result.toString();
-        updateDisplay();
-        
-        // Redirect to subscription page after a short delay
-        setTimeout(() => {
-            window.location.href = 'subscription.html';
-        }, 500);
-    } catch (error) {
-        displayValue = 'Error';
-        updateDisplay();
-        setTimeout(() => {
-            displayValue = '0';
-            updateDisplay();
-        }, 1500);
-    }
+    // Directly redirect to subscription page without showing result
+    window.location.href = 'subscription.html';
 }
 
 // Keyboard support
