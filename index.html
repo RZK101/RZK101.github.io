@@ -1,44 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyWeb - Hacker Terminal</title>
+    <title>Happy Birthday Sayang! 💕</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Matrix Rain Canvas -->
-    <canvas id="matrix-rain"></canvas>
+    <!-- Floating Hearts Background -->
+    <div class="hearts-container" id="hearts-container"></div>
     
-    <!-- Scanline Overlay -->
-    <div class="scanlines"></div>
+    <!-- Stars Background -->
+    <div class="stars-container" id="stars-container"></div>
     
-    <!-- CRT Flicker Effect -->
-    <div class="crt-overlay"></div>
-    
-    <!-- Modern Navbar with hacker aesthetic -->
+    <!-- Modern Navbar -->
     <nav class="navbar">
         <div class="logo">
-            <a href="index.html">
-                <span class="logo-icon">&lt;/&gt;</span>
-                <h1 class="glitch" data-text="MyWeb">MyWeb</h1>
-            </a>
+            <span class="logo-heart">💕</span>
+            <h1>For You</h1>
         </div>
         <div class="menu">
-            <a href="form.html" class="nav-link">
-                <span class="nav-icon">⬡</span>
-                <span>JOIN_US</span>
-            </a>
-            <a href="table.html" class="nav-link">
-                <span class="nav-icon">⬡</span>
-                <span>EXPLORE</span>
-            </a>
-            <a href="https://github.com/RZK101" class="nav-link" target="_blank">
-                <span class="nav-icon">⬡</span>
-                <span>GITHUB</span>
-            </a>
-            <img src="R.jpg" alt="Profile Picture" class="profile-pic">
+            <a href="#home" class="nav-link">Home</a>
+            <a href="#wishes" class="nav-link">Wishes</a>
+            <a href="#memories" class="nav-link">Memories</a>
+            <a href="#surprise" class="nav-link">Surprise</a>
         </div>
         <button class="mobile-menu-btn" aria-label="Menu">
             <span></span>
@@ -47,148 +33,216 @@
         </button>
     </nav>
     
-    <!-- Main Content with terminal design -->
-    <main class="content">
-        <div class="terminal-window">
-            <div class="terminal-header">
-                <div class="terminal-controls">
-                    <span class="control-btn close"></span>
-                    <span class="control-btn minimize"></span>
-                    <span class="control-btn maximize"></span>
-                </div>
-                <div class="terminal-title-bar">
-                    <span class="terminal-icon">💀</span>
-                    <span class="terminal-path">root@myweb:~/hackerman</span>
-                </div>
-            </div>
-            <div class="terminal-body">
-                <div class="command-line">
-                    <span class="prompt">┌──(root㉿myweb)-[~]</span>
-                </div>
-                <div class="command-line">
-                    <span class="prompt">└─#</span>
-                    <span class="command">./welcome.sh</span>
-                </div>
-                <div class="typing-container" id="typing-effect"></div>
-                <div class="cursor-blink">█</div>
-                
-                <div class="system-stats">
-                    <div class="stat-item">
-                        <span class="stat-label">STATUS:</span>
-                        <span class="stat-value online">ONLINE</span>
+    <!-- Main Content -->
+    <main class="content" id="home">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="birthday-badge">🎉 Special Day 🎉</div>
+                <h1 class="glitch-name" data-text="Happy Birthday!">Happy Birthday!</h1>
+                <h2 class="name-title">My Dearest Love 💖</h2>
+                <p class="hero-text">
+                    Hari ini adalah hari istimewa karena dunia mendapatkan seseorang yang sangat luar biasa... YOU!
+                </p>
+                <div class="countdown-container">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="days">00</span>
+                        <span class="countdown-label">Days</span>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-label">ENCRYPTION:</span>
-                        <span class="stat-value">AES-256</span>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="hours">00</span>
+                        <span class="countdown-label">Hours</span>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-label">PROXY:</span>
-                        <span class="stat-value">ACTIVE</span>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="minutes">00</span>
+                        <span class="countdown-label">Minutes</span>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-label">NODES:</span>
-                        <span class="stat-value" id="node-count">1337</span>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="seconds">00</span>
+                        <span class="countdown-label">Seconds</span>
                     </div>
                 </div>
-                
                 <div class="cta-buttons">
-                    <a href="form.html" class="btn btn-primary">
-                        <span class="btn-icon">▶</span>
-                        INITIATE_ACCESS
+                    <a href="#wishes" class="btn btn-primary">
+                        <span class="btn-icon">🎁</span>
+                        Lihat Ucapan
                     </a>
-                    <a href="table.html" class="btn btn-secondary">
-                        <span class="btn-icon">◈</span>
-                        EXPLORE_DATA
+                    <a href="#surprise" class="btn btn-secondary">
+                        <span class="btn-icon">✨</span>
+                        Surprise!
                     </a>
                 </div>
             </div>
-        </div>
+            <div class="hero-image">
+                <div class="photo-frame">
+                    <div class="frame-decoration"></div>
+                    <img src="R.jpg" alt="Birthday Person" class="profile-photo">
+                    <div class="photo-overlay"></div>
+                </div>
+                <div class="floating-elements">
+                    <span class="float-element">🎈</span>
+                    <span class="float-element">🎂</span>
+                    <span class="float-element">🎁</span>
+                    <span class="float-element">💐</span>
+                </div>
+            </div>
+        </section>
         
-        <!-- Feature cards with hacker aesthetic -->
-        <div class="features-grid">
-            <div class="feature-card hack-card">
-                <div class="card-glitch"></div>
-                <div class="feature-icon">🔐</div>
-                <div class="hex-decoration"></div>
-                <h3><span class="highlight">SECURITY</span>_OPS</h3>
-                <p>Master ethical hacking, penetration testing & cybersecurity protocols</p>
-                <div class="card-footer">
-                    <span class="level-badge">LEVEL: ADVANCED</span>
+        <!-- Wishes Section -->
+        <section class="wishes-section" id="wishes">
+            <div class="section-header">
+                <h2 class="section-title">💝 Birthday Wishes 💝</h2>
+                <p class="section-subtitle">Doa dan harapan tulus untukmu</p>
+            </div>
+            
+            <div class="wishes-grid">
+                <div class="wish-card">
+                    <div class="wish-icon">🌟</div>
+                    <h3>Kebahagiaan</h3>
+                    <p>Semoga setiap harimu dipenuhi dengan senyuman, tawa, dan kebahagiaan yang tak terhingga. Kamu deserve all the happiness in the world!</p>
+                </div>
+                <div class="wish-card">
+                    <div class="wish-icon">💪</div>
+                    <h3>Kesehatan</h3>
+                    <p>Semoga selalu diberikan kesehatan yang baik, kekuatan, dan energi untuk mengejar semua impianmu.</p>
+                </div>
+                <div class="wish-card">
+                    <div class="wish-icon">🎯</div>
+                    <h3>Kesuksesan</h3>
+                    <p>Semoga semua goals dan impianmu tercapai. Aku yakin kamu bisa achieve anything yang kamu mau!</p>
+                </div>
+                <div class="wish-card">
+                    <div class="wish-icon">💕</div>
+                    <h3>Cinta</h3>
+                    <p>Semoga cinta selalu mengelilingimu, dari keluarga, teman, dan tentu saja dari aku yang selalu menyayangimu.</p>
                 </div>
             </div>
-            <div class="feature-card hack-card">
-                <div class="card-glitch"></div>
-                <div class="feature-icon">💻</div>
-                <div class="hex-decoration"></div>
-                <h3><span class="highlight">CODING</span>_MATRIX</h3>
-                <p>Weaponize your skills with Python, JavaScript, C++ & assembly</p>
-                <div class="card-footer">
-                    <span class="level-badge">LEVEL: EXPERT</span>
-                </div>
-            </div>
-            <div class="feature-card hack-card">
-                <div class="card-glitch"></div>
-                <div class="feature-icon">🚀</div>
-                <div class="hex-decoration"></div>
-                <h3><span class="highlight">PROJECTS</span>_LAB</h3>
-                <p>Deploy real-world exploits and build your hacker portfolio</p>
-                <div class="card-footer">
-                    <span class="level-badge">LEVEL: ELITE</span>
-                </div>
-            </div>
-        </div>
+        </section>
         
-        <!-- Binary Code Stream -->
-        <div class="binary-stream" id="binary-stream"></div>
+        <!-- Memories Section -->
+        <section class="memories-section" id="memories">
+            <div class="section-header">
+                <h2 class="section-title">📸 Beautiful Memories 📸</h2>
+                <p class="section-subtitle">Momen-momen indah bersama kita</p>
+            </div>
+            
+            <div class="memories-gallery">
+                <div class="memory-item">
+                    <div class="memory-photo">
+                        <img src="ExampleImage.png" alt="Memory 1">
+                        <div class="memory-overlay">
+                            <span class="memory-date">First Date</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="memory-item large">
+                    <div class="memory-photo">
+                        <img src="R.jpg" alt="Memory 2">
+                        <div class="memory-overlay">
+                            <span class="memory-date">Special Moment</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="memory-item">
+                    <div class="memory-photo">
+                        <img src="ExampleImage.png" alt="Memory 3">
+                        <div class="memory-overlay">
+                            <span class="memory-date">Adventure</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Love Letter Section -->
+        <section class="letter-section">
+            <div class="letter-container">
+                <div class="letter-header">
+                    <span class="seal">💌</span>
+                    <h3>A Letter For You</h3>
+                </div>
+                <div class="letter-content" id="letter-content">
+                    <!-- Typing effect will populate this -->
+                </div>
+                <div class="letter-signature">
+                    <p>With all my love,</p>
+                    <p class="signature-name">Your Partner 💕</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Surprise Section -->
+        <section class="surprise-section" id="surprise">
+            <div class="section-header">
+                <h2 class="section-title">🎁 Special Surprise 🎁</h2>
+                <p class="section-subtitle">Something special just for you</p>
+            </div>
+            
+            <div class="surprise-box-container">
+                <div class="surprise-box" id="surprise-box">
+                    <div class="box-lid"></div>
+                    <div class="box-body"></div>
+                    <div class="bow"></div>
+                    <span class="click-hint">Click me!</span>
+                </div>
+            </div>
+            
+            <div class="surprise-content" id="surprise-content">
+                <div class="confetti-canvas" id="confetti-canvas"></div>
+                <div class="surprise-message">
+                    <h2>🎉 SURPRISE! 🎉</h2>
+                    <p class="big-message">I LOVE YOU SO MUCH!</p>
+                    <p class="message-text">Terima kasih sudah lahir ke dunia dan menjadi bagian dari hidupku. Semoga di usia yang baru ini, kita bisa menciptakan lebih banyak kenangan indah bersama.</p>
+                    <div class="love-hearts">
+                        <span>💕</span>
+                        <span>💖</span>
+                        <span>💗</span>
+                        <span>💘</span>
+                        <span>💝</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Cake Section -->
+        <section class="cake-section">
+            <div class="cake-container">
+                <div class="cake">
+                    <div class="cake-layer top"></div>
+                    <div class="cake-layer middle"></div>
+                    <div class="cake-layer bottom"></div>
+                    <div class="candle">
+                        <div class="flame"></div>
+                    </div>
+                </div>
+                <p class="cake-text">Make a wish! 🕯️</p>
+            </div>
+        </section>
     </main>
-
-    <!-- Modern Footer with hacker theme -->
+    
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <div class="footer-section">
-                <h4 class="footer-logo">&lt;MyWeb/&gt;</h4>
-                <p class="footer-tagline">"Hack the Planet. Build the Future."</p>
-                <div class="footer-status">
-                    <span class="status-indicator"></span>
-                    <span>SYSTEM OPERATIONAL</span>
-                </div>
+            <div class="footer-message">
+                <h4>Made with 💕 for You</h4>
+                <p>Every moment with you is a blessing. Happy Birthday, my love!</p>
             </div>
-            <div class="footer-section">
-                <h4>QUICK_ACCESS</h4>
-                <ul class="footer-links">
-                    <li><a href="form.html"><span class="link-prefix">></span> Join Us</a></li>
-                    <li><a href="table.html"><span class="link-prefix">></span> Explore</a></li>
-                    <li><a href="https://github.com/RZK101"><span class="link-prefix">></span> Github</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>CONNECT_NODE</h4>
-                <div class="social-links">
-                    <a href="https://github.com/RZK101" class="social-link" aria-label="GitHub">
-                        <span class="social-icon">GH</span>
-                        <span class="link-glow"></span>
-                    </a>
+            <div class="footer-stats">
+                <div class="stat">
+                    <span class="stat-number" id="days-together">0</span>
+                    <span class="stat-label">Days Together</span>
                 </div>
-                <div class="qr-placeholder">
-                    <div class="qr-code"></div>
-                    <span>SCAN_TO_CONNECT</span>
+                <div class="stat">
+                    <span class="stat-number" id="moments-count">∞</span>
+                    <span class="stat-label">Beautiful Moments</span>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <div class="copyright">
-                <span>&copy; 2024 MyWeb.</span>
-                <span class="divider">|</span>
-                <span>All Rights Reserved.</span>
-            </div>
-            <div class="tech-stack">
-                <span>BUILD: v2.0.77</span>
-                <span class="divider">|</span>
-                <span>ENCRYPTED</span>
-            </div>
+            <p>&copy; 2024 | Created specially for your special day 🎂</p>
         </div>
     </footer>
-
+    
     <script src="script.js"></script>
 </body>
 </html>

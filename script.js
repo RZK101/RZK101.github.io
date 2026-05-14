@@ -1,128 +1,148 @@
-// Matrix Rain Effect
-const canvas = document.getElementById('matrix-rain');
-const ctx = canvas.getContext('2d');
+// Birthday Website JavaScript
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-const matrixChars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-const chars = matrixChars.split('');
-const fontSize = 14;
-const columns = canvas.width / fontSize;
-const drops = [];
-
-for (let i = 0; i < columns; i++) {
-    drops[i] = Math.random() * -100;
+// Floating Hearts Animation
+function createHearts() {
+    const container = document.getElementById('hearts-container');
+    const hearts = ['💕', '💖', '💗', '💘', '💝', '❤️', '🧡', '💛'];
+    
+    setInterval(() => {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+        heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
+        container.appendChild(heart);
+        
+        setTimeout(() => {
+            heart.remove();
+        }, 20000);
+    }, 500);
 }
 
-function drawMatrix() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+// Stars Background
+function createStars() {
+    const container = document.getElementById('stars-container');
     
-    ctx.fillStyle = '#00ff41';
-    ctx.font = fontSize + 'px monospace';
-    
-    for (let i = 0; i < drops.length; i++) {
-        const char = chars[Math.floor(Math.random() * chars.length)];
-        ctx.fillText(char, i * fontSize, drops[i] * fontSize);
-        
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-            drops[i] = 0;
-        }
-        drops[i]++;
+    for (let i = 0; i < 100; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 3 + 's';
+        container.appendChild(star);
     }
 }
 
-setInterval(drawMatrix, 50);
+// Countdown Timer
+function updateCountdown() {
+    // Set birthday date (you can change this to the actual birthday)
+    const birthday = new Date();
+    birthday.setDate(birthday.getDate() + 30); // 30 days from now
+    
+    const now = new Date();
+    const diff = birthday - now;
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    
+    document.getElementById('days').textContent = String(days).padStart(2, '0');
+    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+}
 
-window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-});
+// Typing Effect for Letter
+const letterContent = document.getElementById('letter-content');
+const letterText = `My Dearest Love,
 
-// Typing Effect
-const typingContainer = document.getElementById('typing-effect');
-const typingText = `Welcome to MyWeb - Your gateway to the digital underground.
-Here you will master:
-> Ethical Hacking & Penetration Testing
-> Advanced Programming Techniques
-> Cybersecurity Operations
-> Real-world Project Deployment
+Hari ini adalah hari yang sangat istimewa karena dunia merayakan kelahiran seseorang yang luar biasa... YOU!
 
-Initializing secure connection...
-Access granted.
-Let's begin your journey.`;
+Terima kasih sudah menjadi bagian dari hidupku. Setiap momen bersamamu adalah hadiah yang tak ternilai. Senyumanmu menerangi hari-hariku, dan cintamu membuat hidupku lebih berarti.
+
+Di usia yang baru ini, aku berdoa agar semua impianmu tercapai, semua harapanmu terkabul, dan kebahagiaan selalu menyertaimu. Kamu deserve all the happiness in the world and more.
+
+Aku bersyukur setiap hari karena memilikimu. Semoga kita bisa terus menciptakan kenangan indah bersama, melewati suka dan duka, dan tumbuh bersama dalam cinta.
+
+Selamat ulang tahun, sayang! I love you more than words can express.
+
+Forever yours.`;
 
 let charIndex = 0;
-let lineIndex = 0;
-const lines = typingText.split('\n');
 
-function typeWriter() {
-    if (lineIndex < lines.length) {
-        const currentLine = lines[lineIndex];
-        let lineContent = '';
-        
-        function typeLine() {
-            if (charIndex < currentLine.length) {
-                lineContent += currentLine.charAt(charIndex);
-                typingContainer.innerHTML = lines.slice(0, lineIndex).map(line => `<div>${line}</div>`).join('') + 
-                                           `<div>${lineContent}<span class="cursor-blink">█</span></div>`;
-                charIndex++;
-                setTimeout(typeLine, 30);
-            } else {
-                lineIndex++;
-                charIndex = 0;
-                setTimeout(typeWriter, 300);
-            }
-        }
-        typeLine();
+function typeLetter() {
+    if (charIndex < letterText.length) {
+        letterContent.innerHTML += letterText.charAt(charIndex);
+        charIndex++;
+        setTimeout(typeLetter, 30);
     }
 }
 
-setTimeout(typeWriter, 1000);
+// Surprise Box Interaction
+const surpriseBox = document.getElementById('surprise-box');
+const surpriseContent = document.getElementById('surprise-content');
+const confettiCanvas = document.getElementById('confetti-canvas');
 
-// Node Counter Animation
-const nodeCount = document.getElementById('node-count');
-let currentNodeCount = 1337;
+surpriseBox.addEventListener('click', () => {
+    surpriseBox.style.display = 'none';
+    surpriseContent.classList.add('show');
+    startConfetti();
+});
 
-function updateNodeCount() {
-    const change = Math.floor(Math.random() * 10) - 5;
-    currentNodeCount += change;
-    nodeCount.textContent = currentNodeCount;
+// Confetti Effect
+function startConfetti() {
+    const colors = ['#ff6b9d', '#c44569', '#ffa502', '#ff7675', '#fab1a0', '#ffeaa7'];
+    
+    for (let i = 0; i < 200; i++) {
+        createConfettiPiece(colors);
+    }
 }
 
-setInterval(updateNodeCount, 2000);
-
-// Binary Stream Effect
-const binaryStream = document.getElementById('binary-stream');
-
-function createBinaryColumn() {
-    const column = document.createElement('div');
-    column.style.cssText = `
-        position: absolute;
+function createConfettiPiece(colors) {
+    const confetti = document.createElement('div');
+    confetti.style.cssText = `
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        background: ${colors[Math.floor(Math.random() * colors.length)]};
         left: ${Math.random() * 100}%;
-        top: -100px;
-        font-size: 10px;
-        color: #00ff41;
-        opacity: 0.3;
-        animation: fall ${2 + Math.random() * 3}s linear;
+        top: -10px;
+        border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+        pointer-events: none;
+        z-index: 1001;
     `;
     
-    let binary = '';
-    for (let i = 0; i < 20; i++) {
-        binary += Math.random() > 0.5 ? '1' : '0';
-        binary += '<br>';
-    }
-    column.innerHTML = binary;
+    document.body.appendChild(confetti);
     
-    binaryStream.appendChild(column);
+    const animationDuration = Math.random() * 3 + 2;
+    const rotation = Math.random() * 720;
+    
+    confetti.animate([
+        { transform: `translateY(0) rotate(0deg)`, opacity: 1 },
+        { transform: `translateY(${window.innerHeight}px) rotate(${rotation}deg)`, opacity: 0 }
+    ], {
+        duration: animationDuration * 1000,
+        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+        fill: 'forwards'
+    });
     
     setTimeout(() => {
-        column.remove();
-    }, 5000);
+        confetti.remove();
+    }, animationDuration * 1000);
 }
 
-setInterval(createBinaryColumn, 500);
+// Days Together Counter
+function updateDaysTogether() {
+    // Set your relationship start date here
+    const startDate = new Date('2023-01-01'); // Change this to your actual start date
+    const now = new Date();
+    const diff = now - startDate;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    
+    document.getElementById('days-together').textContent = days;
+}
 
 // Mobile Menu Toggle
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
@@ -167,25 +187,88 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Add glitch effect on hover for feature cards
-document.querySelectorAll('.hack-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        card.style.animation = 'glitch-1 0.3s cubic-bezier(.25, .46, .45, .94) both';
-        setTimeout(() => {
-            card.style.animation = '';
-        }, 300);
+// Intersection Observer for fade-in animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// Observe all sections
+document.querySelectorAll('section').forEach(section => {
+    section.style.opacity = '0';
+    section.style.transform = 'translateY(30px)';
+    section.style.transition = 'all 0.6s ease-out';
+    observer.observe(section);
+});
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    createHearts();
+    createStars();
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+    updateDaysTogether();
+    
+    // Start typing letter when it comes into view
+    const letterSection = document.querySelector('.letter-section');
+    const letterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && charIndex === 0) {
+                setTimeout(typeLetter, 500);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    letterObserver.observe(letterSection);
+});
+
+// Add hover effect to wish cards
+document.querySelectorAll('.wish-card').forEach(card => {
+    card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-10px) scale(1.02)';
+    });
+    
+    card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
     });
 });
 
-// Terminal controls interaction
-document.querySelectorAll('.control-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        if (btn.classList.contains('close')) {
-            document.querySelector('.terminal-window').style.opacity = '0';
-            document.querySelector('.terminal-window').style.transform = 'scale(0.9)';
+// Candle flame interaction
+const candle = document.querySelector('.candle');
+if (candle) {
+    candle.addEventListener('click', () => {
+        const flame = document.querySelector('.flame');
+        if (flame) {
+            flame.style.animation = 'flicker 0.2s ease-in-out infinite alternate';
+            // Create a wish message
+            const wishMsg = document.createElement('div');
+            wishMsg.textContent = '✨ Wish made! ✨';
+            wishMsg.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 3rem;
+                font-family: var(--font-script);
+                color: var(--primary-color);
+                z-index: 2000;
+                animation: fadeInUp 0.5s ease-out;
+                text-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
+            `;
+            document.body.appendChild(wishMsg);
+            
             setTimeout(() => {
-                document.querySelector('.terminal-window').style.display = 'none';
-            }, 300);
+                wishMsg.remove();
+            }, 2000);
         }
     });
-});
+}
